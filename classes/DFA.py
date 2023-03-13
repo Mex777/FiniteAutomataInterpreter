@@ -17,5 +17,3 @@ class Automaton(NFA.Automaton):
                 for letters in super()._adjacent_states[curr_state].keys():
                     if len(super()._adjacent_states[curr_state][letters]) > 1:
                         raise Exception("You can't use the same character to go from a state to more states")
-
-
