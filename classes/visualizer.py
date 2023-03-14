@@ -1,6 +1,5 @@
 import networkx
 import matplotlib.pyplot as plt
-import classes.NFA as NFA
 
 
 class Visualizer:
