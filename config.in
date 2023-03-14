@@ -4,24 +4,26 @@
 [Sigma]
 0
 1
+epsilon
 # this is the state
 [State]
 q1, 0
-q2, 2
+q2, 1
 q3, 1
 q4, 1
 q5, 2
 q6, 1
+q7, 1
 
 #
 [Delta]
-q1, 1, q2
+q1, 0, q2
 q2, 1, q3
-q3, 0, q4
-q4, 1, q2
-q1, 0, q5
-q5, 1, q6
-q6, 0, q5
+q3, epsilon, q6
+q6, epsilon, q7
+q7, epsilon, q3
+q1, 0, q4
+q4, 0, q5
 
 
 
