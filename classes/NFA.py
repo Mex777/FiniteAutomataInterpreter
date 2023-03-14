@@ -91,6 +91,12 @@ class Automaton:
         else:
             raise Exception(f"There is no {section_name}")
 
+    def get_end_states(self):
+        return self.__end_state
+
+    def get_start_state(self):
+        return self.__start_state
+
     # checks if there's a path in the automata that accepts the input_string
     def __exists_path(self, input_string, curr_letter_index, curr_state):
         if curr_letter_index == len(input_string) - 1:
@@ -124,39 +130,3 @@ class Automaton:
         else:
             print(f"The string {input_string} is not accepted\n")
         return path
-
-    def draw_graph(self):
-        graph = networkx.DiGraph()
-        states = self.get_section("[State]")
-
-        node_colors = {}
-        label = {}
-        for curr_state in states:
-            graph.add_node(curr_state)
-
-            # setting the colors
-            if curr_state in self.__end_state:
-                node_colors[curr_state] = "blue"
-            else:
-                node_colors[curr_state] = "lightblue"
-
-            if curr_state in self._adjacent_states.keys():
-                label[curr_state] = {}
-                for edge in self._adjacent_states[curr_state]:
-                    for next_state in self._adjacent_states[curr_state][edge]:
-                        if next_state not in label[curr_state].keys():
-                            label[curr_state][next_state] = edge
-                        else:
-                            label[curr_state][next_state] += ", " + edge
-
-        for curr_state in label.keys():
-            for next_state in label[curr_state].keys():
-               graph.add_edge(curr_state, next_state, label=label[curr_state][next_state])
-
-        pos = networkx.spring_layout(graph)
-        networkx.draw_networkx(graph, pos, with_labels=True, connectionstyle='arc3, rad = 0.1', node_color=[node_colors.get(node, 'b') for node in graph.nodes()], node_size=3000, margins=10)
-        edge_labels = {(u, v): d['label'] for u, v, d in graph.edges(data=True)}
-        networkx.draw_networkx_edge_labels(graph, pos, edge_labels=edge_labels, font_color='black', rotate=True, font_size=11, label_pos=0.2)
-
-        plt.margins(0.2)
-        plt.show()
