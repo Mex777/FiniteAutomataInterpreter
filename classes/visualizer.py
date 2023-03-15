@@ -7,7 +7,7 @@ class Visualizer:
         self.__graph = networkx.MultiDiGraph()
         self.__states = automaton.get_section("[State]")
         self.__end_states = automaton.get_end_states()
-        self.__adjacency_list = automaton._adjacent_states
+        self.__adjacency_list = automaton.get_adjacency_list()
         self.__start_state = automaton.get_start_state()
         self.__construct_graph()
 
@@ -23,11 +23,14 @@ class Visualizer:
 
                 # creating the edge labels for every 2 adjacent nodes(states)
                 for edge in self.__adjacency_list[curr_state]:
+                    label = edge
+                    if edge == "epsilon":
+                        label = "ε"
                     for next_state in self.__adjacency_list[curr_state][edge]:
                         if next_state not in edge_label[curr_state].keys():
-                            edge_label[curr_state][next_state] = edge
+                            edge_label[curr_state][next_state] = label
                         else:
-                            edge_label[curr_state][next_state] += ", " + edge
+                            edge_label[curr_state][next_state] += ", " + label
 
         # adding the edges with their corresponding
         for curr_state in edge_label.keys():

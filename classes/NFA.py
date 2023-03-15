@@ -1,7 +1,3 @@
-import networkx
-import matplotlib.pyplot as plt
-
-
 class Automaton:
     _section = {}
     __end_state = []
@@ -100,6 +96,9 @@ class Automaton:
 
     def get_start_state(self):
         return self.__start_state
+
+    def get_adjacency_list(self):
+        return self._adjacent_states
 
     # checks if there's a path in the automata that accepts the input_string
     def __exists_path(self, input_string, curr_letter_index, curr_state):
