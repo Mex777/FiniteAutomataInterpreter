@@ -1,16 +1,14 @@
 class Automaton:
-    _section = {}
-    __end_state = []
-    __file = []
-    __start_state = -1
-    __reached_state = {}
-    _adjacent_states = {}
+    def __init__(self, file_name):
+        self._section = {}
+        self.__end_state = []
+        self.__file = []
+        self.__start_state = -1
+        self.__reached_state = {}
+        self._adjacent_states = {}
+        self.__parse_file(file_name)
 
-    def __init__(self, file_name=""):
-        if file_name != "":
-            self.parse_file(file_name)
-
-    def parse_file(self, file_name):
+    def __parse_file(self, file_name):
         file = open(file_name, "r")
         file = file.readlines()
         for line in file:
@@ -19,10 +17,10 @@ class Automaton:
             if line != "" and line[0] != '#':
                 self.__file.append(line)
 
-        self._load_sections()
+        self.__load_sections()
 
     # goes through the parsed file and adds each section into the section dictionary
-    def _load_sections(self):
+    def __load_sections(self):
         curr_section = ""
         for line in self.__file:
             if line[0] == '[':
@@ -155,14 +153,19 @@ class Automaton:
     # checks the validity of the string and verifies whether the string is accepted by the automata
     # returns True if the string is accepted and False otherwise
     def check_string(self, input_string):
-        path = self.__exists_path(input_string, -1, self.__start_state)
         alphabet = self.get_section("[Sigma]")
         for curr_char in input_string:
             if curr_char not in alphabet:
                 raise Exception(f"Invalid string\n{curr_char} -> not in Sigma")
 
-        if path is True:
-            print(f"The string {input_string} is accepted\n")
-        else:
-            print(f"The string {input_string} is not accepted\n")
+        path = self.__exists_path(input_string, -1, self.__start_state)
+
         return path
+
+    def reset(self):
+        self._section = {}
+        self.__end_state = []
+        self.__file = []
+        self.__start_state = -1
+        self.__reached_state = {}
+        self._adjacent_states = {}

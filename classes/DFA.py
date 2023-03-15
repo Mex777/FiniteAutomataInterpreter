@@ -7,15 +7,16 @@ class Automaton(NFA.Automaton):
         self.__check_deterministic()
 
     def __check_deterministic(self):
-        section = super()._section
-        if "epsilon" in section["[Sigma]"]:
+        sigma = super().get_section("[Sigma]")
+        if "epsilon" in sigma:
             raise Exception("Epsilon can't be in deterministic automata")
 
         states = super().get_section("[State]")
+        adjacent_states = super().get_adjacency_list()
         for curr_state in states:
-            if curr_state in super()._adjacent_states.keys():
-                for letters in super()._adjacent_states[curr_state].keys():
-                    if len(super()._adjacent_states[curr_state][letters]) > 1:
+            if curr_state in adjacent_states.keys():
+                for letters in adjacent_states[curr_state].keys():
+                    if len(adjacent_states[curr_state][letters]) > 1:
                         raise Exception("You can't use the same character to go from a state to more states")
 
         delta = super().get_section("[Delta]")
