@@ -1,0 +1,19 @@
+# empty string
+
+# strings that have no zeroes
+1111111
+1
+# strings that have 0s divisible by 2
+1001
+11101010101
+00
+# strings that have 0s divisible by 3
+000
+101010101010101010
+# strings that have 0s divisible by 6
+000000
+0011001100
+# strings that have 0s not divisible by 2 nor 3
+10
+111100000
+10101010101010

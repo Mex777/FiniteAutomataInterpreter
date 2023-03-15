@@ -7,23 +7,14 @@
 epsilon
 # this is the state
 [State]
-q1, 0
+q1, 0, 2
 q2, 1
 q3, 1
-q4, 1
-q5, 2
-q6, 1
-q7, 1
-
 #
 [Delta]
-q1, 0, q2
-q2, 1, q3
-q3, epsilon, q6
-q6, epsilon, q7
-q7, epsilon, q3
-q1, 0, q4
-q4, 0, q5
+q1, epsilon, q2
+q2, epsilon, q3
+q3, 1, q1
 
 
 

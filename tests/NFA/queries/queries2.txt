@@ -1,0 +1,16 @@
+# strings with length 2
+11
+10
+01
+00
+# strings with length 1
+1
+0
+# empty strings
+
+# random strings with length greater than 2
+101010101010111
+1111010101111
+000000001
+000000000
+111111111

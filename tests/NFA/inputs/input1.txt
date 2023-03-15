@@ -1,0 +1,20 @@
+# case which ends with an epsilon cycle
+# checks whether the string starts with 1
+[Sigma]
+0
+1
+epsilon
+[State]
+q1, 0
+q2, 2
+q3, 1
+q4, 1
+q5, 1
+[Delta]
+q1, epsilon, q3
+q1, 1, q2
+q2, 1, q2
+q2, 0, q2
+q3, epsilon, q4
+q4, epsilon, q5
+q5, epsilon, q3

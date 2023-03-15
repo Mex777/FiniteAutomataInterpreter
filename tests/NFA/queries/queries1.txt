@@ -1,0 +1,4 @@
+# string that starts with 1
+1010101
+# string that doesn't start with 1
+0000

@@ -4,12 +4,11 @@ import classes.visualizer as gui
 
 
 def main():
-    my_automata = NFA.Automaton("config.in")
-    my_automata.check_string("01")
-    # my_automata.draw_graph()
+    my_automata = NFA.Automaton("./tests/NFA/inputs/input1.txt")
 
-    my_gui = gui.Visualizer(my_automata)
-    my_gui.draw_graph()
+    print(my_automata.check_string("0000"))
+    # my_gui = gui.Visualizer(my_automata)
+    # my_gui.draw_graph()
 
 
 main()
