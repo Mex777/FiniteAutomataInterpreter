@@ -108,15 +108,18 @@ class Automaton:
                 return True
 
             # searching for "epsilon" edges
-            # using the reached dictionary to avoid being stuck in a loop
-            self.__reached_state[curr_state] = True
+            # using a reached dictionary to avoid being stuck in an epsilon loop
+            if curr_letter_index not in self.__reached_state.keys():
+                self.__reached_state[curr_letter_index] = {}
+
+            self.__reached_state[curr_letter_index][curr_state] = True
             for next_state in self._adjacent_states[curr_state]["epsilon"]:
-                if next_state not in self.__reached_state.keys():
-                    self.__reached_state[next_state] = False
-                if self.__reached_state[next_state] is False:
+                if next_state not in self.__reached_state[curr_letter_index].keys():
+                    self.__reached_state[curr_letter_index][next_state] = False
+                if self.__reached_state[curr_letter_index][next_state] is False:
                     if self.__exists_path(input_string, curr_letter_index, next_state) is True:
                         return True
-            self.__reached_state[curr_state] = False
+            self.__reached_state[curr_letter_index][curr_state] = False
 
             return False
 
@@ -126,14 +129,19 @@ class Automaton:
             return False
 
         # searching for "epsilon" edges
-        self.__reached_state[curr_state] = True
+        # using a reached dictionary to avoid being stuck in an epsilon loop
+        if curr_letter_index not in self.__reached_state.keys():
+            self.__reached_state[curr_letter_index] = {}
+
+        self.__reached_state[curr_letter_index][curr_state] = True
         for next_state in self._adjacent_states[curr_state]["epsilon"]:
-            if next_state not in self.__reached_state.keys():
-                self.__reached_state[next_state] = False
-            if self.__reached_state[next_state] is False:
+            if next_state not in self.__reached_state[curr_letter_index].keys():
+                self.__reached_state[curr_letter_index][next_state] = False
+            if self.__reached_state[curr_letter_index][next_state] is False:
                 if self.__exists_path(input_string, curr_letter_index, next_state) is True:
                     return True
-        self.__reached_state[curr_state] = False
+
+        self.__reached_state[curr_letter_index][curr_state] = False
 
         if next_letter not in self._adjacent_states[curr_state].keys():
             return False
