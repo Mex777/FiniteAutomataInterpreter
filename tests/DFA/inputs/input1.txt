@@ -1,0 +1,27 @@
+# checks whether the string is a /* ... */ comment
+[Sigma]
+/
+*
+[State]
+q1, 0
+q2, 1
+q3, 1
+q4, 1
+q5, 2
+[Sigma]
+a
+b
+c
+[Delta]
+q1, /, q2
+q2, *, q3
+q3, a, q3
+q3, b, q3
+q3, c, q3
+q3, /, q3
+q3, *, q4
+q4, *, q4
+q4, /, q5
+q4, a, q3
+q4, b, q3
+q4, c, q3

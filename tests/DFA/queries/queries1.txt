@@ -1,0 +1,13 @@
+# invalid strings
+/*/
+/**//
+//**/
+abc/**/
+# valid strings
+/*/*/
+/**/
+/*abcabccccc*/
+/***************/
+/**a**/
+# empty string
+
