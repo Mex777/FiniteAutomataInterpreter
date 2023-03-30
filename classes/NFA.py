@@ -117,7 +117,7 @@ class Automaton:
                 if self.__reached_state[curr_letter_index][next_state] is False:
                     if self.__exists_path(input_string, curr_letter_index, next_state) is True:
                         return True
-            self.__reached_state[curr_letter_index][curr_state] = False
+            # self.__reached_state[curr_letter_index][curr_state] = False
 
             return False
 
@@ -139,14 +139,21 @@ class Automaton:
                 if self.__exists_path(input_string, curr_letter_index, next_state) is True:
                     return True
 
-        self.__reached_state[curr_letter_index][curr_state] = False
+        # self.__reached_state[curr_letter_index][curr_state] = False
 
         if next_letter not in self._adjacent_states[curr_state].keys():
             return False
 
+        if curr_letter_index + 1 not in self.__reached_state.keys():
+            self.__reached_state[curr_letter_index + 1] = {}
+
         is_path = False
         for next_state in self._adjacent_states[curr_state][next_letter]:
-            is_path |= self.__exists_path(input_string, curr_letter_index + 1, next_state)
+            if next_state not in self.__reached_state[curr_letter_index + 1].keys():
+                self.__reached_state[curr_letter_index + 1][next_state] = False
+            if self.__reached_state[curr_letter_index + 1][next_state] is False:
+                if self.__exists_path(input_string, curr_letter_index + 1, next_state):
+                    return True
 
         return is_path
 
